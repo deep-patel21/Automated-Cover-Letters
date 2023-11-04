@@ -6,4 +6,4 @@ Along with base information, I have a set of pre-written paragraphs that talk ab
 projects, to highlight the skillsets most relevant to the position.
 
 <h2>Demo Video:</h2>
-<video src='[your URL here](https://www.youtube.com/watch?v=Yr1to5v1HC8&ab_channel=DeepStudios)https://www.youtube.com/watch?v=Yr1to5v1HC8&ab_channel=DeepStudios' width=180/>
+<video src='(https://www.youtube.com/watch?v=Yr1to5v1HC8&ab_channel=DeepStudios)https://www.youtube.com/watch?v=Yr1to5v1HC8&ab_channel=DeepStudios' width=180/>
