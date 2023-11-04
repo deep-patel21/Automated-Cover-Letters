@@ -6,5 +6,7 @@ Along with base information, I have a set of pre-written paragraphs that talk ab
 projects, to highlight the skillsets most relevant to the position.
 
 <h2>Demo Video: https://www.youtube.com/watch?v=Yr1to5v1HC8&ab_channel=DeepStudios </h2>
-https://github.com/deep-patel21/Automated-Cover-Letters/assets/103757105/422ebda0-87b8-4f69-a6e5-24a4cb7c520d
+
+<h2>Demonstration Video available below:</h2>
+<div align="center"> <a href="https://www.youtube.com/watch?v=Yr1to5v1HC8&ab_channel=DeepStudios"> <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/103757105/280489674-422ebda0-87b8-4f69-a6e5-24a4cb7c520d.mp4" style="width:100%;"> </a> </div>
 
