@@ -6,7 +6,7 @@ from pathlib import Path
 from docx.shared import Pt
 from datetime import date
 from docx2pdf import convert
-from openpyxl import load_workbook as loadwb
+from openpyxl import load_workbook
 
 class ExcelRow:
     def __init__(self, company, position, requisitionID, contact):
@@ -32,7 +32,7 @@ def replace_string(filename, key, replacement):
     document = docx.Document(filename)
     style = document.styles['Normal']
     font = style.font
-    font.name = 'Times\ New\ Roman'
+    font.name = 'Garamond'
     font.size = Pt(12)
 
     for paragraph in document.paragraphs:
@@ -40,7 +40,7 @@ def replace_string(filename, key, replacement):
             print('Replacement Located.')
             text = paragraph.text.replace(key, replacement)
             paragraph.text = text
-            paragraph.style = document.style['Normal']
+            paragraph.style = document.styles['Normal']
     document.save(filename)
 
 def convertToPDF(destination):
@@ -49,10 +49,10 @@ def convertToPDF(destination):
 #Read data from Excel File containing TK
 def readXL():
     ExcelRows = []
-    myFile = loadwb(filename='cl_data.xlsx')
+    myFile = load_workbook(filename='cl_data.xlsx')
     sh = myFile.active
 
-    for fileRows in range(1, sh.max_row + 1):
+    for fileRows in range(2, sh.max_row + 1):
         row = []
         for fileCols in range(1, sh.max_column + 1):
             cell = sh.cell(row = fileRows, column = fileCols)
@@ -66,26 +66,26 @@ def batchGenerate(letter):
     for row in letter:
         company = row.company
         position = row.position
-        requsitionID = row.requisitionID
+        requisitionID = row.requisitionID
         contact = row.contact
 
-        if requsitionID == 'default':
-            requsitionID = ""
+        if requisitionID == 'default':
+            requisitionID = ""
         else:
-            requsitionID = " of Req.ID " + requsitionID
+            requisitionID = " (Req. ID: " + requisitionID + ")"
         if contact == 'default':
-            contact == "Hiring Manager"
+            contact = "Hiring Manager"
 
-        dict = {'#companyName#': company,
-                    '#date#': date.today().strftime("%B %d, %Y"),
-                    '#jobTitle#': position,
-                    '#jobId#': requsitionID,
-                    '#contactName#':contact}
+        dict = {'#company#': company,
+                '#date#': date.today().strftime("%B %d, %Y"),
+                '#position#': position,
+                '#requisitionID#': requisitionID,
+                '#contact#':contact}
 
         destination = manageDocs(company, position)
 
-        for i in dict:
-            replace_string(destination, i, dict[i])
+        for key in dict:
+            replace_string(destination, key, dict[key])
 
         convertToPDF(destination)
 
