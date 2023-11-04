@@ -4,3 +4,5 @@ Python script that takes arguments for [Company Name], [Job Position],  [Requisi
 Future Update:
 Along with base information, I have a set of pre-written paragraphs that talk about some projects I have completed. Based on my input of [1, 2, or 3], the letter will talk about a different combination of my 
 projects, to highlight the skillsets most relevant to the position.
+
+<a href="https://youtu.be/Yr1to5v1HC8" target="_blank"></a>
