@@ -8,6 +8,16 @@ from datetime import date
 from docx2pdf import convert
 from openpyxl import load_workbook as loadwb
 
+class ExcelRow:
+    def __init__(self, company, position, requisitionID, contact):
+        self.company = company
+        self.position = position
+        self.requisitionID = requisitionID
+        self.contact = contact
+
+    def __str__(self):
+        return str(self.company) + " " + str(self.position) + " " + str(self.requisitionID) + " " + str(self.contact)
+
 def manageDocs(company, position):
     pathOfCompany = company.replace(" ", "")
     pathString = os.path.join(os.getcwd(), pathOfCompany)
@@ -38,8 +48,8 @@ def convertToPDF(destination):
 
 #Read data from Excel File containing TK
 def readXL():
-    rows = []
-    myFile = loadwb(filename='cl.xlsx')
+    ExcelRows = []
+    myFile = loadwb(filename='cl_data.xlsx')
     sh = myFile.active
 
     for fileRows in range(1, sh.max_row + 1):
@@ -47,9 +57,9 @@ def readXL():
         for fileCols in range(1, sh.max_column + 1):
             cell = sh.cell(row = fileRows, column = fileCols)
             row.append(str(cell.value))
-        content = rows(row[0], row[1], row[2], row[3])
-        rows.append(content)
-    return rows
+        content = ExcelRow(row[0], row[1], row[2], row[3])
+        ExcelRows.append(content)
+    return ExcelRows
 
 #Create one PDFs for each row read from readXL()
 def batchGenerate(letter):
@@ -59,11 +69,11 @@ def batchGenerate(letter):
         requsitionID = row.requisitionID
         contact = row.contact
 
-        if requsitionID == 'd':
+        if requsitionID == 'default':
             requsitionID = ""
         else:
             requsitionID = " of Req.ID " + requsitionID
-        if contact == 'd':
+        if contact == 'default':
             contact == "Hiring Manager"
 
         dict = {'#companyName#': company,
@@ -78,18 +88,6 @@ def batchGenerate(letter):
             replace_string(destination, i, dict[i])
 
         convertToPDF(destination)
-
-
-class ExcelRows:
-    def __init__(self, company, position, requisitionID, contact):
-        self.company = company
-        self.position = position
-        self.requisitionID = requisitionID
-        self.contact = contact
-
-    def __str__(self):
-        return str(self.company) + " " + str(self.position) + " " + str(self.requisitionID) + " " + str(self.contact)
-
 
 if __name__ == "__main__":
   os.chdir(os.path.dirname(sys.argv[0]))
