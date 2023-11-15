@@ -1,3 +1,6 @@
+#Early Inspiration, Replaced with Python
+
+
 #!/bin/bash
 EDITOR=nvim
 BASEPATH=~/Documents/CV/cover_letters
